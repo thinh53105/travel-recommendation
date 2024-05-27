@@ -12,4 +12,4 @@ Make sure you have `Docker` and `Docker Compose` installed. To start the applica
 ```
 docker-compose up --build
 ```
-Wait to all services completely start up. Then go to `http://localhost:3000/api` to see the Swagger UI.
+Wait to all services completely start up. Then go to `http://localhost:3000/api/docs` to see the Swagger UI.
