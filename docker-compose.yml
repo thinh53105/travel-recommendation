@@ -49,7 +49,7 @@ services:
       - KAFKA_TOPIC=recommendations
       - MONGODB_URI=mongodb://mongo:27017/recommendations
       - MONGODB_DATABASE=recommendations
-      - START_UP_SLEEP_TIME=8
+      - START_UP_SLEEP_TIME=10
       - START_UP_RETRIES=3
       - RETRY_SLEEP_TIME=3
     depends_on:
@@ -65,7 +65,7 @@ services:
       - MONGODB_DATABASE=recommendations
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_MODEL=gpt-3.5-turbo
-      - START_UP_SLEEP_TIME=8
+      - START_UP_SLEEP_TIME=10
       - START_UP_RETRIES=3
       - RETRY_SLEEP_TIME=3
     depends_on:
