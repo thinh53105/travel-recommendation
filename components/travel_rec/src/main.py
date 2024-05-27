@@ -20,7 +20,7 @@ async def lifespan(app: FastAPI):
     )
     time.sleep(config.START_UP_SLEEP_TIME)
     services = get_all_services()
-    retries = config.RETRY_SLEEP_TIME
+    retries = config.START_UP_RETRIES
     for service in services.values():
         for i in range(retries):
             try:
