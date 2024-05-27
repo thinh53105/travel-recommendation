@@ -53,5 +53,9 @@ async def main():
         await service.stop()
 
 if __name__ == '__main__':
+    logger.info(
+        'Sleep %s seconds to wait kafka server completely up.',
+        config.START_UP_SLEEP_TIME
+    )
     time.sleep(config.START_UP_SLEEP_TIME)
     asyncio.run(main())
