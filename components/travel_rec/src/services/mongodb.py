@@ -15,7 +15,6 @@ class BeanieMongoDBUpstreamService:
         self._client = AsyncIOMotorClient(config.mongo_db.MONGODB_URI)
 
     async def start(self):
-        logger.info('Database name: %s', self._client.db_name)
         await init_beanie(
             database=self._client.db_name,
             document_models=[RecommendationsDocument]
