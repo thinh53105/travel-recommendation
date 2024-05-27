@@ -35,6 +35,7 @@ async def get_results(rec_id: str):
 
     result_dict = await db.find_recommendation_by_id(rec_id)
     if result_dict['status'] == 'completed':
+        result_dict.pop('reason')
         return result_dict
 
     if result_dict['status'] == 'pending':
