@@ -1,3 +1,4 @@
+version: '3.0'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -52,7 +53,7 @@ services:
       - KAFKA_TOPIC=recommendations
       - MONGODB_URI=mongodb://mongo:27017/recommendations
       - MONGODB_DATABASE=recommendations
-      - START_UP_SLEEP_TIME=10
+      - START_UP_SLEEP_TIME=12
     depends_on:
       - kafka
       - mongo
@@ -66,7 +67,7 @@ services:
       - MONGODB_DATABASE=recommendations
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_MODEL=gpt-3.5-turbo
-      - START_UP_SLEEP_TIME=10
+      - START_UP_SLEEP_TIME=12
     depends_on:
       - kafka
       - mongo
