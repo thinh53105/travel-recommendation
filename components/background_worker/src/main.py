@@ -1,6 +1,7 @@
 import asyncio
 import json
 import time
+import sys
 
 from .config import config
 from .exceptions import UpstreamServiceUnavailable
@@ -34,8 +35,19 @@ async def consume(services: dict):
 
 async def main():
     services = get_all_services()
+    retries = config.START_UP_RETRIES
     for service in services.values():
-        await service.start()
+        for i in range(retries):
+            try:
+                await service.start()
+                break
+            except Exception:
+                if i != retries - 1:
+                    logger.error('Service `%s` fail to start. Retry...', service.NAME)
+                    time.sleep(config.RETRY_SLEEP_TIME)
+                else:
+                    logger.error('Service `%s` fail to start. Exit...', service.NAME)
+                    sys.exit(1)
     await consume(services)
     for service in services.values():
         await service.stop()

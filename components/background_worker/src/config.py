@@ -47,6 +47,8 @@ class OpenAIConfig(BaseSettings):
 
 class Config(BaseSettings):
     START_UP_SLEEP_TIME: int = 10
+    START_UP_RETRIES: int = 3
+    RETRY_SLEEP_TIME: int = 3
 
     kafka_consumer: KafkaConsumerConfig = KafkaConsumerConfig()
     mongo_db: MongoDBConfig = MongoDBConfig()

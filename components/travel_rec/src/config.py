@@ -45,7 +45,9 @@ class Config(BaseSettings):
     DESCRIPTION: str = 'API for getting recommendations place to travel in a country with specific season'
     API_PREFIX: str = '/api'
 
-    START_UP_SLEEP_TIME: int = 10
+    START_UP_SLEEP_TIME: int = 8
+    START_UP_RETRIES: int = 3
+    RETRY_SLEEP_TIME: int = 3
 
     kafka_producer: KafkaProducerConfig = KafkaProducerConfig()
     mongo_db: MongoDBConfig = MongoDBConfig()

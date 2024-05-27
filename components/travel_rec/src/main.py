@@ -1,4 +1,5 @@
 import time
+import sys
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -19,14 +20,25 @@ async def lifespan(app: FastAPI):
     )
     time.sleep(config.START_UP_SLEEP_TIME)
     services = get_all_services()
+    retries = config.RETRY_SLEEP_TIME
     for service in services.values():
-        await service.start()
+        for i in range(retries):
+            try:
+                await service.start()
+                break
+            except Exception:
+                if i != retries - 1:
+                    logger.error('Service `%s` fail to start. Retry...', service.NAME)
+                    time.sleep(config.RETRY_SLEEP_TIME)
+                else:
+                    logger.error('Service `%s` fail to start. Exit...', service.NAME)
+                    sys.exit(1)
     yield
     for service in services.values():
         await service.stop()
 
 app = FastAPI(
-    docs_url=config.API_PREFIX,
+    docs_url=f'{config.API_PREFIX}/docs',
     lifespan=lifespan
 )
 app.include_router(recommendations_router, prefix=config.API_PREFIX)
