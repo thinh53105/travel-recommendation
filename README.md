@@ -8,8 +8,8 @@ Create `.env` file at the root level of the project. Then fill your `OPENAI_API_
 OPENAI_API_KEY=mock_key
 ```
 
-Make sure you have Docker installed. To start the application, run:
+Make sure you have `Docker` and `Docker Compose` installed. To start the application, run:
 ```
-docker-compose up
+docker-compose up --build
 ```
-Wait to all services completely start up. Go to `http://localhost:3000/api` to see the Swagger UI.
+Wait to all services completely start up. Then go to `http://localhost:3000/api` to see the Swagger UI.
