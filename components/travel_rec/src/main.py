@@ -37,10 +37,11 @@ async def lifespan(app: FastAPI):
     for service in services.values():
         await service.stop()
 
-app = FastAPI(
-    docs_url=f'{config.API_PREFIX}/docs',
-    lifespan=lifespan
-)
-app.include_router(recommendations_router, prefix=config.API_PREFIX)
+if __name__ == '__main__':
+    app = FastAPI(
+        docs_url=f'{config.API_PREFIX}/docs',
+        lifespan=lifespan
+    )
+    app.include_router(recommendations_router, prefix=config.API_PREFIX)
 
-configure_exception(app=app)
+    configure_exception(app=app)
